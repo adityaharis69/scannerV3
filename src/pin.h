@@ -1,28 +1,16 @@
-// Definisikan jumlah langkah per rotasi dan pin yang akan digunakan
-int stepsPerRevolution = 200; // Jumlah langkah per rotasi pada motor stepper
+// Definisikan jumlah langkah per rotasi dan pin yang akan digunakan 3290
+// posisi z home ke objek xample
+int xyz_dirPin[] = {32, 12, 27}; // Y,X,Z
+int xyz_stepPin[] = {2, 25, 33}; // Y,X,Z
 
-int stepCw = 200;   // cw stepper
-int stepCcw = -200; // cw stepper
+int z_limit = 13;
+int z_home = 14;
 
-int speedX=70;
+int y_limit = 15;
+int y_home = 23;
 
-const int z_stepPin = 33; // Pin yang digunakan untuk pulsa (STEP)
-const int z_dirPin = 27;  // Pxcin yang digunakan untuk arah (DIR)
-
-const int y_stepPin = 2; // Pin yang digunakan untuk pulsa (STEP)
-const int y_dirPin = 32; // Pin yang digunakan untuk arah (DIR)
-
-const int x_stepPin = 25; // Pin yang digunakan untuk pulsa (STEP)
-const int x_dirPin = 12;  // Pin yang digunakan untuk arah (DIR)
-
-const int z_limit = 13;
-const int z_home = 14;
-
-const int y_limit = 15;
-const int y_home = 16;
-
-const int x_limit = 19;
-const int x_home = 21;
+int x_limit = 19;
+int x_home = 21;
 
 const int ENA_pin = 26; // enable pin
 
@@ -34,11 +22,28 @@ float arrayData[data] = {0};
 int LEDRGB = 4;
 int NUMPIXELS = 8;
 
-int koorXY[2]; // x dan y
+int koorXYZ[3]; // xy
+
+int start[2], end[2];
 
 #define EEPROM_SIZE 1
 
 const int addIsRun = 1;
 
-int jarakX=20;
+boolean reverseX = true;
+boolean reverseY = false;
+boolean reverseZ = true;
 
+int kecepatanHome = 1000;
+int kecepatanHomeXY = 1000;
+int z_speed_home = 1000;
+
+int moveXY = 1;
+
+int currkoorX = 0;
+int currkoorY = 0;
+
+char action;
+bool stop;
+char kuadranStart;
+char kuadranEnd;
