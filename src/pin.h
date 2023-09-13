@@ -36,9 +36,9 @@ boolean reverseZ = true;
 
 int kecepatanHome = 1000;
 int kecepatanHomeXY = 1000;
-int z_speed_home = 1000;
+int z_speed_home = 500;
 
-int moveXY = 1;
+int moveXY = 50;
 
 int currkoorX = 0;
 int currkoorY = 0;

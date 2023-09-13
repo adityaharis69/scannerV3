@@ -106,7 +106,6 @@ void z_backtohome()
       }
     }
   }
-  Serial.println(jarak);
   koorXYZ[2] = 0;
 }
 
@@ -154,14 +153,14 @@ void backtohome()
   koorXYZ[0] = 0;
 }
 
-int startPoint(int x)
+int setPoints(int x)
 {
   int set = x;
   if (x < 0)
   {
     set = x * -1;
   }
-  return set;
+  return set * moveXY;
 }
 
 void inputSerial()
@@ -256,10 +255,11 @@ void inputSerial()
     {
       kuadranStart = 'C';
     }
-    else if (start[0] < 0 && start[1] > 0)
+    else if (start[0] > 0 && start[1] < 0)
     {
-      kuadranStart = 'C';
+      kuadranStart = 'D';
     }
+    Serial.println(kuadranStart);
   }
 
   else if (readSerial == ">")
@@ -270,20 +270,19 @@ void inputSerial()
   else if (readSerial == "O")
   {
     z_backtohome();
-    for (int i = 0; i < 3290; i++)
+    for (int i = 0; i < 10050; i++)
     {
       stepper(2, 1, z_speed_home);
     }
-    koorXYZ[2] = 3360;
+    koorXYZ[2] = 10050;
   }
 
   else if (readSerial == "C")
   {
     backtohome();
-    delay(3000);
-    Serial.println(kuadranStart);
-    int x = startPoint(start[0]); // left right
-    int y = startPoint(start[1]); // up down
+    // Serial.println(kuadranStart);
+    int x = setPoints(start[0]); // left right
+    int y = setPoints(start[1]); // up down
     Serial.println(x);
     Serial.println(y);
 
@@ -295,28 +294,63 @@ void inputSerial()
     delay(100);
     if (kuadranStart == 'A')
     {
-      for (int a = 0; a <= y; a++)
+      Serial.println("active A");
+      for (int a = 1; a <= y; a++) // u
+      {
+        stepper(1, -1, kecepatanHome);
+      }
+
+      for (int a = 1; a <= x; a++) // r
       {
         stepper(0, -1, kecepatanHome);
       }
-
-      for (int a = 0; a <= x; a++)
-      {
-        stepper(0, 1, kecepatanHome);
-      }
+      koorXYZ[0] = start[0];
+      koorXYZ[1] = start[1];
     }
 
     else if (kuadranStart == 'B')
     {
       Serial.println("active B");
-      for (int a = 0; a <= y; a++) // up
+      for (int a = 1; a <= y; a++) // up
       {
         stepper(1, -1, kecepatanHome);
       }
-      for (int a = 0; a <= x; a++) // left
+      for (int a = 1; a <= x; a++) // left
       {
         stepper(0, 1, kecepatanHome);
       }
+      koorXYZ[0] = start[0];
+      koorXYZ[1] = start[1];
+    }
+
+    else if (kuadranStart == 'C')
+    {
+      Serial.println("active C");
+      for (int a = 1; a <= y; a++) // down
+      {
+        stepper(1, 1, kecepatanHome);
+      }
+      for (int a = 1; a <= x; a++) // left
+      {
+        stepper(0, 1, kecepatanHome);
+      }
+      koorXYZ[0] = start[0];
+      koorXYZ[1] = start[1];
+    }
+
+    else if (kuadranStart == 'D')
+    {
+      Serial.println("active D");
+      for (int a = 1; a <= y; a++) // down
+      {
+        stepper(1, 1, kecepatanHome);
+      }
+      for (int a = 1; a <= x; a++) // right
+      {
+        stepper(0, -1, kecepatanHome);
+      }
+      koorXYZ[0] = start[0];
+      koorXYZ[1] = start[1];
     }
   }
 }
