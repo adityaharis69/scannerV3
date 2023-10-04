@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": ".."
+		},
+		{
+			"path": "D:/Neurabot/Microscanner/V3/program"
+		},
+		{
+			"path": "D:/Neurabot/Microscanner/V3/program/tutorial/Contrastech_Python_API_for_Linux_AND_Windows"
+		}
+	],
+	"settings": {
+		"[python]": {
+			"editor.defaultFormatter": "ms-python.black-formatter"
+		},
+		"python.formatting.provider": "none"
+	}
+}
