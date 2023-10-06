@@ -30,20 +30,49 @@ int start[2], end[2];
 
 const int addIsRun = 1;
 
-boolean reverseX = true;
-boolean reverseY = false;
-boolean reverseZ = true;
+int kecepatanHome = 500;
+int kecepatanXY = 500;
+int z_speed_home = 250;
 
-int kecepatanHome = 1000;
-int kecepatanHomeXY = 1000;
-int z_speed_home = 500;
+int moverow = 40;
+int movecol = 40;
+int moveY = 1;
+int moveXY = 40;
 
-int moveXY = 50;
-
-int currkoorX = 0;
-int currkoorY = 0;
+int currkoorX = 1;
+int currkoorY = 1;
 
 char action;
 bool stop;
 char kuadranStart;
 char kuadranEnd;
+
+int setkoorX = 0;
+int setkoorY = 0;
+
+int col;
+int row;
+
+int width;
+int high;
+
+int img;
+bool reverseX = true;
+bool reverseY = false;
+bool reverseZ = true;
+
+unsigned long previousMillis = 0; // Waktu sebelumnya
+const long interval = 50;         // Interval waktu dalam milidetik (1 detik)
+bool continuous = false;
+int delayCapture = 500;
+int delayAfterCapture = 500;
+// volatile boolean geser = false;
+int lastCol;
+int lastRow;
+int XX = 1;
+bool active = true;
+
+int z_pas = 10100;
+
+int iterX = 0;
+int iterY = 1;
